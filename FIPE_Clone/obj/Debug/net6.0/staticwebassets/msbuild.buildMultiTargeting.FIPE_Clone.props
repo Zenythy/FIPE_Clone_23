@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\FIPE_Clone.props" />
+</Project>

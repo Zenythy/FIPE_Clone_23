@@ -1,0 +1,117 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veiculos</title>
+</head>
+<body>
+
+  <div class="card">
+        
+    <div class="card-body">
+        <h5 class="card-title">Carros</h5>
+        <p class="card-text">Carros da FIPE</p>
+    </div>
+    
+        
+        <div class="card-body">
+            <div>
+
+                <div class="form-floating">
+                    <select class="form-select" id="SltMesAno" aria-label="Floating label select example">
+                        <option selected>Open this select menu</option>
+                        
+                    </select>
+                    <label for="floatingSelect">Mês e Data</label>
+                </div>
+
+                <div class="form-floating" style=" margin-top: 15px;">
+                    <select class="form-select" id="SltMarcas" aria-label="Floating label select example">
+                        <option selected>Open this select menu</option>
+                        
+                    </select>
+                    <label for="floatingSelect">Marcas</label>
+                </div>
+
+                <div class="form-floating" style=" margin-top: 15px;">
+                    <select class="form-select" id="SltModelos" aria-label="Floating label select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label for="floatingSelect">Modelos</label>
+                </div>
+
+                <div class="form-floating" style=" margin-top: 15px;">
+                    <select class="form-select" id="SltModeloAno" aria-label="Floating label select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label for="floatingSelect">Modelos Ano</label>
+                </div>
+
+                <div class="form-floating" style=" margin-top: 15px;">
+                    <select class="form-select" id="SltModeloAtravesAno" aria-label="Floating label select example">
+                        <option selected>Open this select menu</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <label for="floatingSelect">Modelo Atraves de Ano</label>
+                </div>
+
+                <button type="button" class="btn btn-outline-primary" style=" margin-top: 25px;">Primary</button>
+            </div>
+        </div>
+  </div>
+
+    
+        
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+
+    
+
+    function carregarMarcas() {
+        $.ajax({
+            url: '/Veiculos/Getmarca',
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Limpar o ComboBox
+                $("#SltMarcas").empty();
+
+                // Preencher o ComboBox com os novos dados
+                $.each(data, function (index, item) {
+                    $("#SltMarcas").append('<option value="' + item.value + '">' + item.Label + '</option>');
+                });
+            },
+            error: function (ex) {
+                console.log('Erro ao obter dados para ComboBox: ' + ex);
+            }
+        });
+    }
+
+    // Evento que aciona a chamada Ajax quando necessário, por exemplo, ao carregar a página
+    $(document).ready(function () {
+        $("#SltMarcas").click(carregarMarcas);
+    });
+
+    carregarMarcas();
+
+</script>
